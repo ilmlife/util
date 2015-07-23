@@ -3,12 +3,12 @@ package com.ilmlife.util.data;
 import java.util.Random;
 
 /**
- * 随机数处理
+ * 随机数据处理
  * 
  * @author ilmlife E-Mail：ilmlife@126.com
  * @version 1.0 创建时间：2015年7月22日 下午9:50:36
  */
-public class RandomDataTool {
+public class RandomTool {
 	/**
 	 * 计算data随机按向下middle向上middle浮动后得到的数据<middle为正整数>
 	 * @param data 需要计算的数据
@@ -82,4 +82,37 @@ public class RandomDataTool {
 		return start + num;
 	}
 	
+	
+	/**
+	 * 获取随机字符串
+	 * @param length 随机字符串的长度
+	 * @param upLowSeed(1-3) 生成随机数的规则(1只生成数字,2数字和大写字母,3数字和大小写字母)
+	 * @return
+	 */
+	public static String genRandomStr(int length,int upLowSeed){
+		upLowSeed = upLowSeed <= 0 ? 1 : upLowSeed;
+		upLowSeed = upLowSeed >= 3 ? 3 : upLowSeed;
+		Random random = new Random();
+		StringBuilder sb = new StringBuilder(length);
+		int index = 0;
+		while(index < length){
+			int r = random.nextInt(upLowSeed);
+			switch (r) {
+				case 0:// 数字
+					sb.append((char)(getRandomFromRange(48, 58, random)));
+					break;
+				case 1:// 大写字母
+					sb.append((char)(getRandomFromRange(65, 91, random)));
+					break;
+				case 2:// 小写字母
+					sb.append((char)(getRandomFromRange(97, 123, random)));
+					break;
+				default:
+					sb.append((char)(getRandomFromRange(65, 91, random)));
+					break;
+			}
+			index++;
+		}
+		return sb.toString();
+	}
 }
