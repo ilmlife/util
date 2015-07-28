@@ -2,6 +2,10 @@ package com.ilmlife.util.data;
 
 import java.util.Random;
 
+import com.ilmlife.util.constant.ConstantSet;
+import com.ilmlife.util.exception.ErrorParamsException;
+import com.ilmlife.util.text.TextTool;
+
 /**
  * 随机数据处理
  * 
@@ -84,35 +88,49 @@ public class RandomTool {
 	
 	
 	/**
-	 * 获取随机字符串
+	 * 获取随机字符串(只支持数字、大小写字母、常用符号)
+	 * 
 	 * @param length 随机字符串的长度
-	 * @param upLowSeed(1-3) 生成随机数的规则(1只生成数字,2数字和大写字母,3数字和大小写字母)
-	 * @return
+	 * @param upLowSeed 生成随机数的规则,其值为一个字符串,字符串中字符含义为：[1:数字;2:大写字母;3:小写字母;4:标点符号]<br/>
+	 * 
+	 * @return 长度为length的随机数
+	 * @throws ErrorParamsException 参数错误异常
 	 */
-	public static String genRandomStr(int length,int upLowSeed){
-		upLowSeed = upLowSeed <= 0 ? 1 : upLowSeed;
-		upLowSeed = upLowSeed >= 3 ? 3 : upLowSeed;
-		Random random = new Random();
+	public static String genRandomStr(int length,String upLowSeed) throws ErrorParamsException{
+		if(upLowSeed == null || !TextTool.valid("[1-4]{1,4}", upLowSeed)) {
+			throw new ErrorParamsException(upLowSeed);
+		}
+		
 		StringBuilder sb = new StringBuilder(length);
+		
 		int index = 0;
+		Random random = new Random();
 		while(index < length){
-			int r = random.nextInt(upLowSeed);
-			switch (r) {
-				case 0:// 数字
-					sb.append((char)(getRandomFromRange(48, 58, random)));
-					break;
-				case 1:// 大写字母
-					sb.append((char)(getRandomFromRange(65, 91, random)));
-					break;
-				case 2:// 小写字母
-					sb.append((char)(getRandomFromRange(97, 123, random)));
-					break;
-				default:
-					sb.append((char)(getRandomFromRange(65, 91, random)));
-					break;
+			char seed = upLowSeed.charAt(random.nextInt(upLowSeed.length()));
+			switch (seed) {
+				case '1': {
+					sb.append(ConstantSet.BASE_NUMBERS[random.nextInt(ConstantSet.BASE_NUMBERS.length)]); 
+				}; break;
+				case '2':{
+					sb.append(ConstantSet.UPPERCASE[random.nextInt(ConstantSet.UPPERCASE.length)]); 
+				}; break;
+				case '3':{
+					sb.append(ConstantSet.LOWERCASE[random.nextInt(ConstantSet.LOWERCASE.length)]); 
+				}; break;
+				case '4':{
+					sb.append(ConstantSet.PUNCTUATION[random.nextInt(ConstantSet.PUNCTUATION.length)]); 
+				}; break;
+				default:{
+					sb.append(ConstantSet.BASE_NUMBERS[random.nextInt(ConstantSet.BASE_NUMBERS.length)]); 
+				}; break;
 			}
 			index++;
 		}
 		return sb.toString();
+	}
+	
+	
+	public static void main(String[] args) throws Exception {
+		System.out.println(genRandomStr(20, "1234"));
 	}
 }
