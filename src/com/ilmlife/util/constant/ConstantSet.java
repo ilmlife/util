@@ -18,4 +18,6 @@ public final class ConstantSet {
 	public static final char []PUNCTUATION = {'!', '"', '#', '$', '%', '&', '\'', '(',')','*', '+', ',', '-', '.', '/',
 			':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~'};
 	
+	/** 数字格式化名 **/
+	public static final String NUMBER_FORMAT_STR[] = new String[]{"亿", "万", ""};
 }
