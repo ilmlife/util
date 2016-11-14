@@ -2,7 +2,7 @@ package com.ilmlife.util.constant;
 /**
  * 常用集合
  * 
- * @author silly E-Mail：silly@intoms.cn
+ * @author ilmlife E-Mail：ilmlife@126.com
  * @version 1.0 创建时间：2015年7月28日 上午10:06:01
  */
 public final class ConstantSet {

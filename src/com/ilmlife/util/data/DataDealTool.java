@@ -5,7 +5,7 @@ import com.ilmlife.util.constant.ConstantSet;
 /**
  * 数据处理工具
  * 
- * @author silly E-Mail：silly@intoms.cn
+ * @author ilmlife E-Mail：ilmlife@126.com
  * @version 1.0 创建时间：2016年10月28日 上午10:30:29
  */
 public final class DataDealTool {
