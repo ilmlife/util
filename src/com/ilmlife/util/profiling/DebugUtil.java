@@ -1,4 +1,4 @@
-package com.ilmlife.util;
+package com.ilmlife.util.profiling;
 
 /**
  * 调试工具类

@@ -12,10 +12,11 @@ public class Holder<T> {
 	public Holder( T value) {
 		holding = value;
 	}
-	public T getHolding() {
+	
+	public T getValue() {
 		return holding;
 	}
-	public void setHolding(T holding) {
+	public void setValue(T holding) {
 		this.holding = holding;
 	}
 }
