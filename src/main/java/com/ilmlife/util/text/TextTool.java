@@ -2,11 +2,9 @@ package com.ilmlife.util.text;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Base64;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
 
 /**
  * 字符处理工具
@@ -37,7 +35,7 @@ public class TextTool {
 	 * @throws UnsupportedEncodingException
 	 */
 	public static String base64Encoder(String value,String prefix,String code) throws UnsupportedEncodingException {
-		String base64Value = new BASE64Encoder().encode(value.getBytes(code));
+		String base64Value = Base64.getEncoder().encodeToString(value.getBytes(code));
 		base64Value = prefix + base64Value;
 		return base64Value;
 	}
@@ -50,7 +48,7 @@ public class TextTool {
 	 * @throws IOException 
 	 */
 	public static String base64Decoder(String value,String prefix,String code) throws IOException {
-		byte[] base64ValueBytes = new BASE64Decoder().decodeBuffer(value.substring(prefix.length()));
+		byte[] base64ValueBytes = Base64.getDecoder().decode(value.substring(prefix.length()));;
     	return new String(base64ValueBytes, code);         
 	}
 }
